@@ -22,7 +22,8 @@ function App() {
     } else if (grocery && isEditing) {
       console.log('edit');
     } else {
-      console.log('adding to the list item and alert that item were added');
+      showAlert(true, 'Item added', 'success');
+
       const newGroceryItem = {
         id: new Date().getTime().toString(),
         title: grocery,
@@ -38,6 +39,11 @@ function App() {
       message: message,
       type: type,
     });
+  };
+
+  const clearListItem = () => {
+    showAlert(true, 'Elements deleted', 'danger');
+    setList([]);
   };
 
   return (
@@ -61,7 +67,9 @@ function App() {
       {list.length > 0 && (
         <div className="grocery-list-container">
           <List items={list} />
-          <button className="clear-btn">Clear items</button>
+          <button className="clear-btn" onClick={clearListItem}>
+            Clear items
+          </button>
         </div>
       )}
     </div>
