@@ -18,7 +18,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({
-    show: true,
+    show: false,
     message: '',
     type: '',
   });
@@ -26,7 +26,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!grocery) {
-      showAlert(true, 'Please add prober value', 'danger');
+      showAlert(true, 'Please add proper value', 'danger');
     } else if (grocery && isEditing) {
       setList(
         list.map((item) => {
