@@ -13,7 +13,19 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('hello');
+    if (!grocery) {
+      console.log('alert');
+    } else if (grocery && isEditing) {
+      console.log('edit');
+    } else {
+      console.log('adding to the list item and alert that item were added');
+      const newGroceryItem = {
+        id: new Date().getTime().toString(),
+        title: grocery,
+      };
+      setList([...list, newGroceryItem]);
+      setGrocery('');
+    }
   };
 
   return (
@@ -25,7 +37,7 @@ function App() {
           <input
             type="text"
             className="input-grocery"
-            placeholder="e.g milk"
+            placeholder="e.g. milk"
             value={grocery}
             onChange={(e) => setGrocery(e.target.value)}
           />
@@ -34,10 +46,12 @@ function App() {
           </button>
         </div>
       </form>
-      <div className="grocery-list-container">
-        <List />
-        <button className="clear-btn">Clear items</button>
-      </div>
+      {list.length > 0 && (
+        <div className="grocery-list-container">
+          <List items={list} />
+          <button className="clear-btn">Clear items</button>
+        </div>
+      )}
     </div>
   );
 }
